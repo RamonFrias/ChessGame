@@ -6,8 +6,4 @@
     <RootNamespace>Xadrez_console</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Board\" />
-  </ItemGroup>
-
 </Project>
