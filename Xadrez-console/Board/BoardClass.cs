@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xadrez_console.Board
+﻿namespace Xadrez_console.Board
 {
     class BoardClass
     {
@@ -17,9 +13,18 @@ namespace Xadrez_console.Board
             Pieces = new Piece[lines, columns];
         }
 
+        // Metod to return a piece in a especific point
         public Piece Piece(int line, int column)
         {
             return Pieces[line, column];
+        }
+
+        public void PutPiece(Piece piece, Position position)
+        {
+            // Access this position and put the piece.
+            Pieces[position.Line, position.Column] = piece;
+            // Inform the piece position in Position.
+            piece.Position = position;
         }
     }
 }

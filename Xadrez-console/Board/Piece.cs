@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xadrez_console.Board.Enums;
+﻿using Xadrez_console.Board.Enums;
 
 namespace Xadrez_console.Board
 {
@@ -12,9 +9,9 @@ namespace Xadrez_console.Board
         public int QuantityOfMoviments { get; protected set; }
         public BoardClass Board { get; set; }
 
-        public Piece(Position position, Colors color, BoardClass board)
+        public Piece(Colors color, BoardClass board)
         {
-            Position = position;
+            Position = null;
             Color = color;
             Board = board;
             QuantityOfMoviments = 0;
