@@ -8,8 +8,7 @@ namespace Xadrez_console
         static void Main(string[] args)
         {
             BoardClass board = new BoardClass(8, 8);
-
-            Console.WriteLine(board);
+            Screen.PrintBoard(board); 
         }
     }
 }

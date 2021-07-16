@@ -8,13 +8,18 @@ namespace Xadrez_console.Board
     {
         public int Lines { get; set; }
         public int Columns { get; set; }
-        protected Piece[,] Piece;
+        protected Piece[,] Pieces;
 
         public BoardClass(int lines, int columns)
         {
             Lines = lines;
             Columns = columns;
-            Piece = new Piece[lines, columns];
+            Pieces = new Piece[lines, columns];
+        }
+
+        public Piece Piece(int line, int column)
+        {
+            return Pieces[line, column];
         }
     }
 }
