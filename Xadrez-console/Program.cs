@@ -13,10 +13,10 @@ namespace Xadrez_console
             BoardClass board = new BoardClass(8, 8);
             try
             {
-                board.PutPiece(new King(Colors.Yellow, board), new Position(0, 0));
-                board.PutPiece(new Queen(Colors.Yellow, board), new Position(1, 3));
-                board.PutPiece(new Rook(Colors.Yellow, board), new Position(2, 4));
-                board.PutPiece(new Bishop(Colors.Yellow, board), new Position(0, 4));
+                board.PutPiece(new King(Colors.Black, board), new Position(0, 0));
+                board.PutPiece(new Queen(Colors.Black, board), new Position(1, 3));
+                board.PutPiece(new Rook(Colors.White, board), new Position(2, 4));
+                board.PutPiece(new Bishop(Colors.White, board), new Position(0, 4));
 
                 ChessPosition position = new ChessPosition('c', 7);
                 Screen.PrintBoard(board);
