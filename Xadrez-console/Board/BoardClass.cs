@@ -39,6 +39,20 @@ namespace Xadrez_console.Board
             piece.Position = position;
         }
 
+        public Piece RemovePiece(Position position)
+        {
+            if (Piece(position) == null)
+            {
+                return null;
+            }
+
+            Piece auxiliar = Piece(position);
+            auxiliar.Position = null;
+
+            Pieces[position.Line, position.Column] = null;
+            return auxiliar;
+        }
+
         public bool ExistPieceInPosition(Position position)
         {
             ValidPosition(position);

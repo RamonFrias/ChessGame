@@ -16,5 +16,10 @@ namespace Xadrez_console.Board
             Board = board;
             QuantityOfMoviments = 0;
         }
+
+        public void IncrementMovimentsQuantity()
+        {
+            QuantityOfMoviments++;
+        }
     }
 }
