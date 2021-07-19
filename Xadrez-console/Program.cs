@@ -17,9 +17,11 @@ namespace Xadrez_console
                 board.PutPiece(new Queen(Colors.Yellow, board), new Position(1, 3));
                 board.PutPiece(new Rook(Colors.Yellow, board), new Position(2, 4));
                 board.PutPiece(new Bishop(Colors.Yellow, board), new Position(0, 4));
-                board.PutPiece(new Bishop(Colors.Yellow, board), new Position(0, 9));
 
+                ChessPosition position = new ChessPosition('c', 7);
                 Screen.PrintBoard(board);
+
+                Console.WriteLine(position.ToPosition());
             }
             catch (BoardException e)
             {
