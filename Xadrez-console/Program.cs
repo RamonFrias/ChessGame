@@ -13,8 +13,21 @@ namespace Xadrez_console
             try
             {
                 ChessMatch match = new ChessMatch();
-                
-                Screen.PrintBoard(match.board);                
+                while (!match.Finish)
+                {
+                    Console.Clear();
+                    Screen.PrintBoard(match.board);
+
+                    Console.WriteLine();
+
+                    Console.Write("Origin: ");
+                    Position origin = Screen.ReadChessPosition().ToPosition();
+
+                    Console.Write("Destiny: ");
+                    Position destiny = Screen.ReadChessPosition().ToPosition();
+
+                    match.ExecutMoviment(origin, destiny);
+                }              
             }
             catch (BoardException e)
             {

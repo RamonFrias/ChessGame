@@ -9,12 +9,14 @@ namespace Xadrez_console.Chess
         public BoardClass board { get; private set; }
         private int turn;
         private Colors currentPlayer;
+        public bool Finish { get; private set; }
 
         public ChessMatch()
         {
             board = new BoardClass(8, 8);
             turn = 1;
             currentPlayer = Colors.White;
+            Finish = false;
             PutingInitialPieces();
         }
 

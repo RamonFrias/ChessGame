@@ -1,6 +1,7 @@
 ﻿using Xadrez_console.Board;
 using System;
 using Xadrez_console.Board.Enums;
+using Xadrez_console.Chess;
 
 namespace Xadrez_console
 {
@@ -42,6 +43,14 @@ namespace Xadrez_console
                 Console.Write(piece);
                 Console.ForegroundColor = color;
             }
+        }
+
+        public static ChessPosition ReadChessPosition()
+        {
+            string auxiliar = Console.ReadLine();
+            char column = auxiliar[0];
+            int line = int.Parse(auxiliar[1] + "");
+            return new ChessPosition(column, line);
         }
     }
 }
