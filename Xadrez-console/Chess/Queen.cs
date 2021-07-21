@@ -3,16 +3,16 @@ using Xadrez_console.Board.Enums;
 
 namespace Xadrez_console.Chess
 {
-    class Queen : Piece
-    {
-        public Queen(Colors color, BoardClass board) : base(color, board)
-        {
+    //class Queen : Piece
+    //{
+    //    public Queen(Colors color, BoardClass board) : base(color, board)
+    //    {
 
-        }
+    //    }
 
-        public override string ToString()
-        {
-            return "Q";
-        }
-    }
+    //    public override string ToString()
+    //    {
+    //        return "Q";
+    //    }
+    //}
 }

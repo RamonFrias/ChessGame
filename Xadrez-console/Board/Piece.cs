@@ -2,7 +2,7 @@
 
 namespace Xadrez_console.Board
 {
-    class Piece
+    abstract class Piece
     {
         public Position Position { get; set; }
         public Colors Color { get; protected set; }
@@ -21,5 +21,7 @@ namespace Xadrez_console.Board
         {
             QuantityOfMoviments++;
         }
+
+        public abstract bool[,] PossibleMoviments();
     }
 }

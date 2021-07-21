@@ -13,6 +13,7 @@ namespace Xadrez_console
             try
             {
                 ChessMatch match = new ChessMatch();
+
                 while (!match.Finish)
                 {
                     Console.Clear();
@@ -23,9 +24,15 @@ namespace Xadrez_console
                     Console.Write("Origin: ");
                     Position origin = Screen.ReadChessPosition().ToPosition();
 
+                    bool[,] possiblePositions = match.board.Piece(origin).PossibleMoviments();
+
+                    Console.Clear();
+                    Screen.PrintBoard(match.board, possiblePositions);
+
                     Console.Write("Destiny: ");
                     Position destiny = Screen.ReadChessPosition().ToPosition();
 
+                    
                     match.ExecutMoviment(origin, destiny);
                 }              
             }

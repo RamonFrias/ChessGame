@@ -61,7 +61,7 @@ namespace Xadrez_console.Board
 
         public bool VerifyPosition(Position position)
         {
-            if (position.Line >=Lines || position.Line < 0 || position.Column > Columns || position.Column < 0)
+            if (position.Line >= Lines || position.Line < 0 || position.Column >= Columns || position.Column < 0)
             {
                 return false;
             }
