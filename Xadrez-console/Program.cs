@@ -21,6 +21,11 @@ namespace Xadrez_console
 
                     Console.WriteLine();
 
+                    Console.WriteLine($"Turn: {match.Turn}");
+                    Console.WriteLine($"Waiting move: {match.CurrentPlayer}");
+
+                    Console.WriteLine();
+
                     Console.Write("Origin: ");
                     Position origin = Screen.ReadChessPosition().ToPosition();
 
@@ -29,11 +34,12 @@ namespace Xadrez_console
                     Console.Clear();
                     Screen.PrintBoard(match.board, possiblePositions);
 
+                    Console.WriteLine("\n");
+
                     Console.Write("Destiny: ");
                     Position destiny = Screen.ReadChessPosition().ToPosition();
 
-                    
-                    match.ExecutMoviment(origin, destiny);
+                    match.RealizeMove(origin, destiny);
                 }              
             }
             catch (BoardException e)
