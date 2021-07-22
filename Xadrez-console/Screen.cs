@@ -2,6 +2,7 @@
 using System;
 using Xadrez_console.Board.Enums;
 using Xadrez_console.Chess;
+using Xadrez_console.Exceptions;
 
 namespace Xadrez_console
 {
@@ -79,6 +80,13 @@ namespace Xadrez_console
             char column = auxiliar[0];
             int line = int.Parse(auxiliar[1] + "");
             return new ChessPosition(column, line);
+        }
+
+        public static void PrintException(BoardException e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine("Press ENTER to continue!");
+            Console.ReadLine();
         }
     }
 }

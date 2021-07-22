@@ -16,36 +16,46 @@ namespace Xadrez_console
 
                 while (!match.Finish)
                 {
-                    Console.Clear();
-                    Screen.PrintBoard(match.board);
+                    try
+                    {
+                        Console.Clear();
+                        Screen.PrintBoard(match.Board);
 
-                    Console.WriteLine();
+                        Console.WriteLine();
 
-                    Console.WriteLine($"Turn: {match.Turn}");
-                    Console.WriteLine($"Waiting move: {match.CurrentPlayer}");
+                        Console.WriteLine($"Turn: {match.Turn}");
+                        Console.WriteLine($"Waiting move: {match.CurrentPlayer}");
 
-                    Console.WriteLine();
+                        Console.WriteLine();
 
-                    Console.Write("Origin: ");
-                    Position origin = Screen.ReadChessPosition().ToPosition();
+                        Console.Write("Origin: ");
+                        Position origin = Screen.ReadChessPosition().ToPosition();
+                        match.ValidOriginPosition(origin);
 
-                    bool[,] possiblePositions = match.board.Piece(origin).PossibleMoviments();
+                        bool[,] possiblePositions = match.Board.Piece(origin).PossibleMoviments();
 
-                    Console.Clear();
-                    Screen.PrintBoard(match.board, possiblePositions);
+                        Console.Clear();
+                        Screen.PrintBoard(match.Board, possiblePositions);
 
-                    Console.WriteLine("\n");
+                        Console.WriteLine("\n");
 
-                    Console.Write("Destiny: ");
-                    Position destiny = Screen.ReadChessPosition().ToPosition();
+                        Console.Write("Destiny: ");
+                        Position destiny = Screen.ReadChessPosition().ToPosition();
+                        match.ValidDestinyPosition(origin, destiny);
 
-                    match.RealizeMove(origin, destiny);
+                        match.RealizeMove(origin, destiny);
+                    }
+                    catch (BoardException e)
+                    {
+                        Screen.PrintException(e);
+                    }
+                    
                 }              
             }
             catch (BoardException e)
             {
 
-                Console.WriteLine(e.Message);
+                Screen.PrintException(e);
             }
         }
     }

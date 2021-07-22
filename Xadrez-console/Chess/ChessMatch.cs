@@ -1,19 +1,20 @@
 ﻿using System;
 using Xadrez_console.Board;
 using Xadrez_console.Board.Enums;
+using Xadrez_console.Exceptions;
 
 namespace Xadrez_console.Chess
 {
     class ChessMatch
     {
-        public BoardClass board { get; private set; }
+        public BoardClass Board { get; private set; }
         public int Turn { get; private set; }
         public Colors CurrentPlayer { get; private set; }
         public bool Finish { get; private set; }
 
         public ChessMatch()
         {
-            board = new BoardClass(8, 8);
+            Board = new BoardClass(8, 8);
             Turn = 1;
             CurrentPlayer = Colors.White;
             Finish = false;
@@ -22,10 +23,10 @@ namespace Xadrez_console.Chess
 
         public void ExecutMoviment(Position origin, Position destiny)
         {
-            Piece piece = board.RemovePiece(origin);
+            Piece piece = Board.RemovePiece(origin);
             piece.IncrementMovimentsQuantity();
-            Piece capturedPiece = board.RemovePiece(destiny);
-            board.PutPiece(piece, destiny);
+            Piece capturedPiece = Board.RemovePiece(destiny);
+            Board.PutPiece(piece, destiny);
         }
 
         public void RealizeMove(Position origin, Position destiny)
@@ -33,6 +34,30 @@ namespace Xadrez_console.Chess
             ExecutMoviment(origin, destiny);
             Turn++;
             ChangePlayer();
+        }
+
+        public void ValidOriginPosition(Position position)
+        {
+            if (Board.Piece(position) == null)
+            {
+                throw new BoardException("Not exist piece in the origin position!");
+            }
+            if (CurrentPlayer != Board.Piece(position).Color)
+            {
+                throw new BoardException("The origin piece chosen for you it's not yours!");
+            }
+            if (!Board.Piece(position).ExistPossibleMoviments())
+            {
+                throw new BoardException("Don't have possible moviments for the origin piece chosed!");
+            }
+        }
+
+        public void ValidDestinyPosition(Position origin, Position destiny)
+        {
+            if (!Board.Piece(origin).CanMoveTo(destiny))
+            {
+                throw new BoardException("Invalid destiny position!");
+            }
         }
 
         private void ChangePlayer()
@@ -49,19 +74,19 @@ namespace Xadrez_console.Chess
 
         private void PutingInitialPieces()
         {
-            board.PutPiece(new Rook(Colors.White, board), new ChessPosition('c', 1).ToPosition());
-            board.PutPiece(new Rook(Colors.White, board), new ChessPosition('c', 2).ToPosition());
-            board.PutPiece(new Rook(Colors.White, board), new ChessPosition('d', 2).ToPosition());
-            board.PutPiece(new Rook(Colors.White, board), new ChessPosition('e', 2).ToPosition());
-            board.PutPiece(new Rook(Colors.White, board), new ChessPosition('e', 1).ToPosition());
-            board.PutPiece(new King(Colors.White, board), new ChessPosition('d', 1).ToPosition());
-            
-            board.PutPiece(new Rook(Colors.Black, board), new ChessPosition('c', 8).ToPosition());
-            board.PutPiece(new Rook(Colors.Black, board), new ChessPosition('c', 7).ToPosition());
-            board.PutPiece(new Rook(Colors.Black, board), new ChessPosition('d', 7).ToPosition());
-            board.PutPiece(new Rook(Colors.Black, board), new ChessPosition('e', 7).ToPosition());
-            board.PutPiece(new Rook(Colors.Black, board), new ChessPosition('e', 8).ToPosition());
-            board.PutPiece(new King(Colors.Black, board), new ChessPosition('d', 8).ToPosition());
+            Board.PutPiece(new Rook(Colors.White, Board), new ChessPosition('c', 1).ToPosition());
+            Board.PutPiece(new Rook(Colors.White, Board), new ChessPosition('c', 2).ToPosition());
+            Board.PutPiece(new Rook(Colors.White, Board), new ChessPosition('d', 2).ToPosition());
+            Board.PutPiece(new Rook(Colors.White, Board), new ChessPosition('e', 2).ToPosition());
+            Board.PutPiece(new Rook(Colors.White, Board), new ChessPosition('e', 1).ToPosition());
+            Board.PutPiece(new King(Colors.White, Board), new ChessPosition('d', 1).ToPosition());
+
+            Board.PutPiece(new Rook(Colors.Black, Board), new ChessPosition('c', 8).ToPosition());
+            Board.PutPiece(new Rook(Colors.Black, Board), new ChessPosition('c', 7).ToPosition());
+            Board.PutPiece(new Rook(Colors.Black, Board), new ChessPosition('d', 7).ToPosition());
+            Board.PutPiece(new Rook(Colors.Black, Board), new ChessPosition('e', 7).ToPosition());
+            Board.PutPiece(new Rook(Colors.Black, Board), new ChessPosition('e', 8).ToPosition());
+            Board.PutPiece(new King(Colors.Black, Board), new ChessPosition('d', 8).ToPosition());
         }
 
     }
