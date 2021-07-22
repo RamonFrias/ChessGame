@@ -3,11 +3,49 @@ using System;
 using Xadrez_console.Board.Enums;
 using Xadrez_console.Chess;
 using Xadrez_console.Exceptions;
+using System.Collections.Generic;
 
 namespace Xadrez_console
 {
     class Screen
     {
+
+        public static void PrintMatch(ChessMatch match)
+        {
+            PrintBoard(match.Board);
+
+            Console.WriteLine();
+            PrintCapturedPieces(match);
+            Console.WriteLine();
+
+            Console.WriteLine($"Turn: {match.Turn}");
+            Console.WriteLine($"Waiting move: {match.CurrentPlayer}");
+        }
+
+        public static void PrintCapturedPieces(ChessMatch match)
+        {
+            Console.WriteLine("Captured pieces:");
+            Console.Write($"White: ");
+            PrintSet(match.CapturedPiece(Colors.White));
+            Console.WriteLine();
+            ConsoleColor auxiliar = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"Black: ");
+            PrintSet(match.CapturedPiece(Colors.Black));
+            Console.ForegroundColor = auxiliar;
+            Console.WriteLine();
+        }
+
+        public static void PrintSet(HashSet<Piece> pieces)
+        {
+            Console.Write("[");
+            foreach (Piece piece in pieces)
+            {
+                Console.Write($"{piece} ");
+            }
+            Console.Write("]");
+        }
+
         public static void PrintBoard(BoardClass board)
         {
             for (int i = 0; i < board.Lines; i++)
