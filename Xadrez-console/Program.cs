@@ -44,8 +44,9 @@ namespace Xadrez_console
                     {
                         Screen.PrintException(e);
                     }
-                    
-                }              
+                }
+                Console.Clear();
+                Screen.PrintMatch(match);
             }
             catch (BoardException e)
             {

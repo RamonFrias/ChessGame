@@ -27,7 +27,7 @@ namespace Xadrez_console.Chess
 
             Position pos = new Position(0, 0);
 
-            // Above
+            // North
             pos.DefineValues(Position.Line - 1, Position.Column);
             while (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
@@ -36,10 +36,10 @@ namespace Xadrez_console.Chess
                 {
                     break;
                 }
-                pos.Line = pos.Line - 1;
+                pos.DefineValues(pos.Line - 1, pos.Column);
             }
 
-            // Bellow
+            // South
             pos.DefineValues(Position.Line + 1, Position.Column);
             while (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
@@ -48,10 +48,10 @@ namespace Xadrez_console.Chess
                 {
                     break;
                 }
-                pos.Line = pos.Line + 1;
+                pos.DefineValues(pos.Line + 1, pos.Column);
             }
 
-            // Right
+            // East
             pos.DefineValues(Position.Line, Position.Column + 1);
             while (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
@@ -60,10 +60,10 @@ namespace Xadrez_console.Chess
                 {
                     break;
                 }
-                pos.Column = pos.Column + 1;
+                pos.DefineValues(pos.Line, pos.Column + 1);
             }
 
-            // Left
+            // West
             pos.DefineValues(Position.Line, Position.Column - 1);
             while (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
@@ -72,7 +72,7 @@ namespace Xadrez_console.Chess
                 {
                     break;
                 }
-                pos.Column = pos.Column - 1;
+                pos.DefineValues(pos.Line, pos.Column - 1);
             }
 
             return mat;

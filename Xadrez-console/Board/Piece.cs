@@ -22,6 +22,11 @@ namespace Xadrez_console.Board
             QuantityOfMoviments++;
         }
 
+        public void DecrementMovimentsQuantity()
+        {
+            QuantityOfMoviments--;
+        }
+
         public bool ExistPossibleMoviments()
         {
             bool[,] mat = PossibleMoviments();

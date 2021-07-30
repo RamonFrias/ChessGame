@@ -19,17 +19,36 @@ namespace Xadrez_console
             Console.WriteLine();
 
             Console.WriteLine($"Turn: {match.Turn}");
-            Console.WriteLine($"Waiting move: {match.CurrentPlayer}");
+
+            if (!match.Finish)
+            {
+                Console.WriteLine($"Waiting move: {match.CurrentPlayer}");
+
+                if (match.Check)
+                {
+                    Console.WriteLine("Check!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Checkmate!");
+                Console.WriteLine($"Winner: {match.CurrentPlayer}");
+            }
+            
         }
 
         public static void PrintCapturedPieces(ChessMatch match)
         {
             Console.WriteLine("Captured pieces:");
+
             Console.Write($"White: ");
             PrintSet(match.CapturedPiece(Colors.White));
+
             Console.WriteLine();
+
             ConsoleColor auxiliar = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
+
             Console.Write($"Black: ");
             PrintSet(match.CapturedPiece(Colors.Black));
             Console.ForegroundColor = auxiliar;

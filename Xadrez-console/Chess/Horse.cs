@@ -3,15 +3,16 @@ using Xadrez_console.Board.Enums;
 
 namespace Xadrez_console.Chess
 {
-    class King : Piece
+    class Horse : Piece
     {
-        public King(Colors color, BoardClass board) : base(color, board)
+        public Horse(Colors color, BoardClass board) : base(color, board)
         {
+
         }
 
         public override string ToString()
         {
-            return "R";
+            return "K";
         }
 
         private bool ThisMovimentIsPossible(Position position)
@@ -23,68 +24,45 @@ namespace Xadrez_console.Chess
         public override bool[,] PossibleMoviments()
         {
             bool[,] mat = new bool[Board.Lines, Board.Columns];
-
             Position pos = new Position(0, 0);
 
-            // North
-            pos.DefineValues(Position.Line - 1, Position.Column);
-
+            pos.DefineValues(Position.Line - 1, Position.Column - 2);
             if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
                 mat[pos.Line, pos.Column] = true;
             }
 
-            // Northeast
-            pos.DefineValues(Position.Line - 1, Position.Column + 1);
-
+            pos.DefineValues(Position.Line - 2, Position.Column - 1);
             if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
                 mat[pos.Line, pos.Column] = true;
             }
 
-            // East
-            pos.DefineValues(Position.Line, Position.Column + 1);
-
+            pos.DefineValues(Position.Line - 2, Position.Column + 1);
             if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
                 mat[pos.Line, pos.Column] = true;
             }
 
-            // Southeast
-            pos.DefineValues(Position.Line + 1, Position.Column + 1);
-
+            pos.DefineValues(Position.Line - 1, Position.Column + 2);
             if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
                 mat[pos.Line, pos.Column] = true;
             }
 
-            // South
-            pos.DefineValues(Position.Line + 1, Position.Column);
-
+            pos.DefineValues(Position.Line + 1, Position.Column + 2);
+            if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
+            
+            pos.DefineValues(Position.Line + 1, Position.Column - 2);
             if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
                 mat[pos.Line, pos.Column] = true;
             }
 
-            // Southwest
-            pos.DefineValues(Position.Line + 1, Position.Column - 1);
-
-            if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
-            {
-                mat[pos.Line, pos.Column] = true;
-            }
-
-            // West
-            pos.DefineValues(Position.Line, Position.Column - 1);
-
-            if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
-            {
-                mat[pos.Line, pos.Column] = true;
-            }
-
-            // Northwest
-            pos.DefineValues(Position.Line - 1, Position.Column - 1);
-
+            pos.DefineValues(Position.Line + 2, Position.Column + 1);
             if (Board.VerifyPosition(pos) && ThisMovimentIsPossible(pos))
             {
                 mat[pos.Line, pos.Column] = true;
