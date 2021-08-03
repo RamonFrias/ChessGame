@@ -5,13 +5,23 @@ namespace Xadrez_console.Chess
 {
     class King : Piece
     {
-        public King(Colors color, BoardClass board) : base(color, board)
+
+        private ChessMatch match;
+
+        public King(Colors color, BoardClass board, ChessMatch match) : base(color, board)
         {
+            this.match = match;
         }
 
         public override string ToString()
         {
-            return "R";
+            return "K";
+        }
+
+        private bool TestRookToRoque(Position position)
+        {
+            Piece piece = Board.Piece(position);
+            return piece != null && piece is Rook && piece.Color == Color && piece.QuantityOfMoviments == 0;
         }
 
         private bool ThisMovimentIsPossible(Position position)
@@ -90,6 +100,36 @@ namespace Xadrez_console.Chess
                 mat[pos.Line, pos.Column] = true;
             }
 
+            // Roque - Especial move
+            if (QuantityOfMoviments == 0 && !match.Check)
+            {
+                // Small roque
+                Position positionRook = new Position(Position.Line, Position.Column + 3);
+                if (TestRookToRoque(positionRook))
+                {
+                    Position auxiliar1 = new Position(Position.Line, Position.Column + 1);
+                    Position auxiliar2 = new Position(Position.Line, Position.Column + 2);
+
+                    if (Board.Piece(auxiliar1) == null && Board.Piece(auxiliar2) == null)
+                    {
+                        mat[Position.Line, Position.Column + 2] = true;
+                    }
+                }
+                
+                // Big roque
+                Position positionRook2 = new Position(Position.Line, Position.Column - 4);
+                if (TestRookToRoque(positionRook2))
+                {
+                    Position auxiliar1 = new Position(Position.Line, Position.Column - 1);
+                    Position auxiliar2 = new Position(Position.Line, Position.Column - 2);
+                    Position auxiliar3 = new Position(Position.Line, Position.Column - 3);
+
+                    if (Board.Piece(auxiliar1) == null && Board.Piece(auxiliar2) == null && Board.Piece(auxiliar3) == null)
+                    {
+                        mat[Position.Line, Position.Column - 2] = true;
+                    }
+                }
+            }
             return mat;
         }
     }

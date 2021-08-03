@@ -12,7 +12,7 @@ namespace Xadrez_console.Chess
 
         public override string ToString()
         {
-            return "K";
+            return "H";
         }
 
         private bool ThisMovimentIsPossible(Position position)

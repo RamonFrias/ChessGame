@@ -38,6 +38,27 @@ namespace Xadrez_console.Chess
             {
                 capturedPieces.Add(capturedPiece);
             }
+
+            // Especial move small roque
+            if (piece is King && destiny.Column == origin.Column + 2)
+            {
+                Position RookOrigin = new Position(origin.Line, origin.Column + 3);
+                Position RookDestiny = new Position(origin.Line, origin.Column + 1);
+                Piece rook = Board.RemovePiece(RookOrigin);
+                rook.IncrementMovimentsQuantity();
+                Board.PutPiece(rook, RookDestiny);
+            }
+            
+            // Especial move big roque
+            if (piece is King && destiny.Column == origin.Column - 2)
+            {
+                Position RookOrigin = new Position(origin.Line, origin.Column - 4);
+                Position RookDestiny = new Position(origin.Line, origin.Column - 1);
+                Piece rook = Board.RemovePiece(RookOrigin);
+                rook.IncrementMovimentsQuantity();
+                Board.PutPiece(rook, RookDestiny);
+            }
+
             return capturedPiece;
         }
 
@@ -79,6 +100,26 @@ namespace Xadrez_console.Chess
                 capturedPieces.Remove(capturedPiece);
             }
             Board.PutPiece(piece, origin);
+
+            // Especial move small roque
+            if (piece is King && destiny.Column == origin.Column + 2)
+            {
+                Position RookOrigin = new Position(origin.Line, origin.Column + 3);
+                Position RookDestiny = new Position(origin.Line, origin.Column + 1);
+                Piece rook = Board.RemovePiece(RookDestiny);
+                rook.DecrementMovimentsQuantity();
+                Board.PutPiece(rook, RookOrigin);
+            }
+
+            // Especial move big roque
+            if (piece is King && destiny.Column == origin.Column - 2)
+            {
+                Position RookOrigin = new Position(origin.Line, origin.Column - 4);
+                Position RookDestiny = new Position(origin.Line, origin.Column - 1);
+                Piece rook = Board.RemovePiece(RookDestiny);
+                rook.DecrementMovimentsQuantity();
+                Board.PutPiece(rook, RookOrigin);
+            }
         }
 
         public void ValidOriginPosition(Position position)
@@ -232,7 +273,7 @@ namespace Xadrez_console.Chess
             PutNewPiece('b', 1, new Horse(Colors.White, Board));
             PutNewPiece('c', 1, new Bishop(Colors.White, Board));
             PutNewPiece('d', 1, new Queen(Colors.White, Board));
-            PutNewPiece('e', 1, new King(Colors.White, Board));
+            PutNewPiece('e', 1, new King(Colors.White, Board, this));
             PutNewPiece('f', 1, new Bishop(Colors.White, Board));
             PutNewPiece('g', 1, new Horse(Colors.White, Board));
             PutNewPiece('h', 1, new Rook(Colors.White, Board));
@@ -249,7 +290,7 @@ namespace Xadrez_console.Chess
             PutNewPiece('b', 8, new Horse(Colors.Black, Board));
             PutNewPiece('c', 8, new Bishop(Colors.Black, Board));
             PutNewPiece('d', 8, new Queen(Colors.Black, Board));
-            PutNewPiece('e', 8, new King(Colors.Black, Board));
+            PutNewPiece('e', 8, new King(Colors.Black, Board, this));
             PutNewPiece('f', 8, new Bishop(Colors.Black, Board));
             PutNewPiece('g', 8, new Horse(Colors.Black, Board));
             PutNewPiece('h', 8, new Rook(Colors.Black, Board));
