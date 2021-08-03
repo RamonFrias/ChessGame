@@ -91,6 +91,23 @@ namespace Xadrez_console.Chess
                 UndoMoviment(origin, destiny, capturedPiece);
                 throw new BoardException("You can't put yourself in check");
             }
+
+            Piece piece = Board.Piece(destiny);
+
+            // Especial move promotion
+            if (piece is Pawn)
+            {
+                if ((piece.Color == Colors.White && destiny.Line == 0) || (piece.Color == Colors.Black && destiny.Line == 7))
+                {
+                    piece = Board.RemovePiece(destiny);
+                    pieces.Remove(piece);
+
+                    Piece queen = new Queen(piece.Color, Board);
+                    Board.PutPiece(queen, destiny);
+                    pieces.Add(queen);
+                }
+            }
+
             if (IsInCheck(Opponent(CurrentPlayer)))
             {
                 Check = true;
@@ -109,8 +126,6 @@ namespace Xadrez_console.Chess
                 Turn++;
                 ChangePlayer();
             }
-
-            Piece piece = Board.Piece(destiny);
 
             // Especial move - en passant
             if (piece is Pawn && (destiny.Line == origin.Line - 2 || destiny.Line == origin.Line + 2))
